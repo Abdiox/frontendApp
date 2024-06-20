@@ -75,10 +75,9 @@ export default function ParticipantForm() {
 
   function handleDelete(id: number) {
     deleteParticipant(id).then(() => {
-      setParticipants(participants.filter((p) => p.id !== id));
-      setTimeout(() => {
-        window.location.reload();
-      }, 700);
+      getParticipants().then((data) => {
+        setParticipants(data);
+      });
     });
   }
 

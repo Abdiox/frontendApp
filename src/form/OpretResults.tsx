@@ -108,9 +108,17 @@ export default function ResultForm() {
       });
   }
 
+  function handleBack() {
+    navigate("/results");
+  }
+
   return (
     <div className="container">
       <h2>Resultater</h2>
+
+      <button className="buttonBack" type="button" onClick={handleBack}>
+        Tilbage
+      </button>
       {error && <p className="error">{error}</p>}
       <table>
         <thead>
