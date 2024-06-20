@@ -27,7 +27,7 @@ export default function ResultForm() {
     getResults()
       .then((data) => {
         console.log("Fetched Results:", data);
-        setResults(data);
+        setResults(data.map((res: Results) => ({ ...res, date: new Date(res.date) })));
       })
       .catch((err) => {
         setError("Failed to fetch results");
@@ -68,7 +68,7 @@ export default function ResultForm() {
     action(resultRequest)
       .then(() => getResults())
       .then((data) => {
-        setResults(data);
+        setResults(data.map((res: Results) => ({ ...res, date: new Date(res.date) })));
         setResult(EMPTY_RESULT);
       })
       .catch((err) => {
@@ -85,13 +85,15 @@ export default function ResultForm() {
     } else if (id === "disciplin") {
       const disciplin = disciplins.find((d) => d.id === parseInt(value));
       if (disciplin) setResult({ ...result, disciplin, disciplinName: disciplin.name });
+    } else if (id === "date") {
+      setResult({ ...result, date: new Date(value) });
     } else {
       setResult({ ...result, [id]: value });
     }
   }
 
   function handleEdit(selectedResult: Results) {
-    setResult(selectedResult);
+    setResult({ ...selectedResult, date: new Date(selectedResult.date) });
   }
 
   function handleDelete(id: number) {
