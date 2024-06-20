@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { getParticipants } from "../services/apiFacade";
 import { Modal } from "../modal/Modal";
 
+import "./Participants.css";
+
 export const Participants = () => {
   const [participants, setParticipants] = useState([]);
   const [error, setError] = useState("");
@@ -35,7 +37,7 @@ export const Participants = () => {
       {error && <p>{error}</p>}
       <table>
         <thead>
-          <tr>
+          <tr className="participant-item">
             <th>Name</th>
             <th>Gender</th>
             <th>Age</th>

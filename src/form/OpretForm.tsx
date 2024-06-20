@@ -77,7 +77,6 @@ export default function ParticipantForm() {
         <select id="gender" value={participant.gender} onChange={handleChange}>
           <option value="Mand">Mand</option>
           <option value="Kvinde">Kvinde</option>
-          <option value="Andet">Andet</option>
         </select>
         <input type="number" id="age" value={participant.age} onChange={handleChange} placeholder="Age" />
         <input type="text" id="club" value={participant.club} onChange={handleChange} placeholder="Club" />
