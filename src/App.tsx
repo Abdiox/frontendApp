@@ -8,15 +8,19 @@ import { Disciplins } from "./components/Disciplins";
 import { Results } from "./components/Results";
 import ParticipantForm from "./form/OpretForm";
 import DisciplinForm from "./form/OpretFormDisciplin";
+import Home from "./components/Home";
 
 import Layout from "./Layout";
 
 import "./App.css";
-
 export default function App() {
   return (
     <>
       <Layout>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+        </Routes>
+
         <Routes>
           <Route path="/participants" element={<Participants />} />
         </Routes>

@@ -20,6 +20,9 @@ export const Results = () => {
       <table>
         <thead>
           <tr>
+            <th>Deltager ID:</th>
+            <th>Deltager Navn:</th>
+            <th>Disciplin Navn:</th>
             <th>Resultat Type:</th>
             <th>Resultat:</th>
             <th>Dato:</th>
@@ -29,8 +32,11 @@ export const Results = () => {
           {result.map((results) => {
             return (
               <tr key={results.id}>
+                <td>{results.participantId}</td>
+                <td>{results.participantName}</td>
+                <td>{results.disciplinName}</td>
                 <td>{results.resultType}</td>
-                <td>{results.resultValue}</td>
+                <td>{(results.resultValue / 1000).toFixed(2)} sekunder</td>
                 <td>{results.date}</td>
               </tr>
             );

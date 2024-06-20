@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import AuthStatus from "./security/AuthStatus";
 
 import "./NavHeader.css";
 
@@ -8,22 +7,22 @@ export default function NavHeader() {
     <nav>
       <ul>
         <li>
-          <NavLink to="/">🏠Home</NavLink>
+          <NavLink to="/home">🏠Home</NavLink>
         </li>
         <li>
-          <NavLink to="/participants">Deltager:</NavLink>
+          <NavLink to="/participants">Deltager</NavLink>
         </li>
         <li>
-          <NavLink to="/disciplins">Discipliner:</NavLink>
+          <NavLink to="/disciplins">Discipliner</NavLink>
         </li>
         <li>
-          <NavLink to="/results">Resultater:</NavLink>
+          <NavLink to="/results">Resultater</NavLink>
         </li>
         <li>
-          <NavLink to="/opretform">Opret Deltager:</NavLink>
+          <NavLink to="/opretform">Opret Deltager</NavLink>
         </li>
         <li>
-          <NavLink to="/disciplinform">Opret Disciplin:</NavLink>
+          <NavLink to="/disciplinform">Opret Disciplin</NavLink>
         </li>
       </ul>
     </nav>
