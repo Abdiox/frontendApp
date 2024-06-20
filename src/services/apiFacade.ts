@@ -3,7 +3,7 @@ import { API_URL } from "../settings";
 import { makeOptions, handleHttpErrors } from "./fetchUtils";
 
 const PARTICIPANTS_URL = API_URL + "/participants";
-const DISCIPLIN_URL = API_URL + "/disciplin";
+const DISCIPLIN_URL = API_URL + "/disciplins";
 const RESULTS_URL = API_URL + "/results";
 
 interface Participants {
@@ -37,7 +37,7 @@ async function getParticipants(): Promise<Array<Participants>> {
   return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
 }
 
-async function getPets(): Promise<Array<Disciplin>> {
+async function getDisciplins(): Promise<Array<Disciplin>> {
   const options = makeOptions("GET");
   console.log("pets", disciplins);
   return fetch(DISCIPLIN_URL, options).then(handleHttpErrors);
@@ -48,4 +48,4 @@ async function getResults(): Promise<Array<Results>> {
   return fetch(RESULTS_URL, options).then(handleHttpErrors);
 }
 
-export { getParticipants, getPets, getResults };
+export { getParticipants, getDisciplins, getResults };

@@ -15,7 +15,7 @@ export const Participants = () => {
 
   return (
     <div>
-      <h2>Owners</h2>
+      <h2>Deltager</h2>
       <table>
         <thead>
           <tr>
