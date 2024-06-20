@@ -59,7 +59,13 @@ export default function ResultForm() {
     event.preventDefault();
     const action = result.id ? editResult : addResult;
 
-    action(result)
+    const updatedResult = {
+      ...result,
+      participantId: result.participant.id,
+      disciplinId: result.disciplin.id,
+    };
+
+    action(updatedResult)
       .then(() => getResults())
       .then((data) => {
         setResults(data);
@@ -73,7 +79,15 @@ export default function ResultForm() {
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { id, value } = event.target;
-    setResult({ ...result, [id]: id === "participant" || id === "disciplin" ? value : value });
+    if (id === "participant") {
+      const participant = participants.find((p) => p.id === parseInt(value));
+      if (participant) setResult({ ...result, participant });
+    } else if (id === "disciplin") {
+      const disciplin = disciplins.find((d) => d.id === parseInt(value));
+      if (disciplin) setResult({ ...result, disciplin });
+    } else {
+      setResult({ ...result, [id]: value });
+    }
   }
 
   function handleEdit(selectedResult: Results) {
@@ -125,10 +139,10 @@ export default function ResultForm() {
       <form onSubmit={handleSubmit}>
         <label>
           Deltager:
-          <select id="participant" value={result.participant.name || ""} onChange={handleChange}>
+          <select id="participant" value={result.participant.id || ""} onChange={handleChange}>
             <option value="">Vælg deltager</option>
             {participants.map((participant) => (
-              <option key={participant.id} value={participant.name}>
+              <option key={participant.id} value={participant.id}>
                 {participant.name}
               </option>
             ))}
@@ -136,10 +150,10 @@ export default function ResultForm() {
         </label>
         <label>
           Disciplin:
-          <select id="disciplin" value={result.disciplin.name || ""} onChange={handleChange}>
+          <select id="disciplin" value={result.disciplin.id || ""} onChange={handleChange}>
             <option value="">Vælg disciplin</option>
             {disciplins.map((disciplin) => (
-              <option key={disciplin.id} value={disciplin.name}>
+              <option key={disciplin.id} value={disciplin.id}>
                 {disciplin.name}
               </option>
             ))}
