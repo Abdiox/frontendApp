@@ -1,37 +1,51 @@
+import { EnumDataType } from "sequelize";
 import { API_URL } from "../settings";
 import { makeOptions, handleHttpErrors } from "./fetchUtils";
 
-const OWNERS_URL = API_URL + "/participants";
-const PETS_URL = API_URL + "/pets";
+const PARTICIPANTS_URL = API_URL + "/participants";
+const DISCIPLIN_URL = API_URL + "/disciplin";
+const RESULTS_URL = API_URL + "/results";
 
 interface Participants {
-  id: number;
+  id: number | null;
   name: string;
   gender: string;
   age: number;
   club: string;
 }
 
-interface Pets {
-  id: number;
+interface Disciplin {
+  id: number | null;
   name: string;
-  birth: string;
-  type: string;
-  owner: Participants;
+  resultType: string;
+  participants: Participants;
+  results: Results;
+}
+
+interface Results {
+  resultType: string;
+  date: Date;
+  resultValue: number;
 }
 
 let participants: Array<Participants> = [];
-let pets: Array<Pets> = [];
+let disciplins: Array<Pets> = [];
+let result: Array<Results> = [];
 
 async function getParticipants(): Promise<Array<Participants>> {
   const options = makeOptions("GET");
-  return fetch(OWNERS_URL, options).then(handleHttpErrors);
+  return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
 }
 
-async function getPets(): Promise<Array<Pets>> {
+async function getPets(): Promise<Array<Disciplin>> {
   const options = makeOptions("GET");
-  console.log("pets", pets);
-  return fetch(PETS_URL, options).then(handleHttpErrors);
+  console.log("pets", disciplins);
+  return fetch(DISCIPLIN_URL, options).then(handleHttpErrors);
 }
 
-export { getParticipants, getPets };
+async function getResults(): Promise<Array<Results>> {
+  const options = makeOptions("GET");
+  return fetch(RESULTS_URL, options).then(handleHttpErrors);
+}
+
+export { getParticipants, getPets, getResults };
