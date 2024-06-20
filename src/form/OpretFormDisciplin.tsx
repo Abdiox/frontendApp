@@ -6,8 +6,8 @@ import { DisciplineType, ResultType } from "../Enums/EnumTypes"; // Importer enu
 const EMPTY_DISCIPLIN: Disciplin = {
   id: 0,
   name: "",
-  disciplinType: DisciplineType.LØB_100_METER, // Initial værdi kan sættes til en standard værdi
-  resultType: "", // Du kan også oprette en select for resultType på samme måde
+  disciplinType: "",
+  resultType: "",
 };
 
 export default function DisciplinForm() {

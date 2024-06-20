@@ -11,7 +11,7 @@ interface Participants {
   gender: string;
   age: number;
   club: string;
-  disciplin: Disciplin;
+  disciplin: Disciplin[];
 }
 
 interface Disciplin {
@@ -19,11 +19,12 @@ interface Disciplin {
   name: string;
   disciplinType: string;
   resultType: string;
-  participants: Participants;
-  results: Results;
+  participants: Participants[];
+  results: Results[];
 }
 
 interface Results {
+  id: number | null;
   resultType: string;
   date: Date;
   resultValue: number;
@@ -33,64 +34,69 @@ interface Results {
   disciplinName: string;
 }
 
-let participants: Array<Participants> = [];
-let disciplins: Array<Pets> = [];
-let result: Array<Results> = [];
-
-//********     PARTICIPANTS ROUTES      ********//
-
-async function getParticipants(): Promise<Array<Participants>> {
+async function getParticipants(): Promise<Participants[]> {
   const options = makeOptions("GET");
   return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
 }
 
-async function addParticipant(newParticipant: Participants): Promise<Array<Participants>> {
+async function addParticipant(newParticipant: Omit<Participants, "disciplin"> & { disciplineIds: number[] }): Promise<Participants> {
   const options = makeOptions("POST", newParticipant);
   return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
 }
 
-async function editParticipant(participant: Participants) {
+async function editParticipant(participant: Omit<Participants, "disciplin"> & { disciplineIds: number[] }): Promise<Participants> {
   const options = makeOptions("PUT", participant);
-  const response = await fetch(`${API_URL}/participants/${participant.id}`, options);
+  const response = await fetch(`${PARTICIPANTS_URL}/${participant.id}`, options);
   return handleHttpErrors(response);
 }
 
-async function deleteParticipant(id: number): Promise<Array<Participants>> {
+async function deleteParticipant(id: number): Promise<void> {
   const options = makeOptions("DELETE");
-  return fetch(PARTICIPANTS_URL + "/" + id, options).then(handleHttpErrors);
+  return fetch(`${PARTICIPANTS_URL}/${id}`, options).then(handleHttpErrors);
 }
 
-//********     DISCIPLINS ROUTES      ********//
-
-async function getDisciplins(): Promise<Array<Disciplin>> {
+async function getDisciplins(): Promise<Disciplin[]> {
   const options = makeOptions("GET");
-  console.log("pets", disciplins);
   return fetch(DISCIPLIN_URL, options).then(handleHttpErrors);
 }
 
-async function addDisciplin(newDisciplin: Disciplin): Promise<Array<Disciplin>> {
+async function addDisciplin(newDisciplin: Disciplin): Promise<Disciplin> {
   const options = makeOptions("POST", newDisciplin);
   return fetch(DISCIPLIN_URL, options).then(handleHttpErrors);
 }
 
-async function editDisciplin(disciplin: Disciplin) {
+async function editDisciplin(disciplin: Disciplin): Promise<Disciplin> {
   const options = makeOptions("PUT", disciplin);
-  const response = await fetch(`${API_URL}/disciplins/${disciplin.id}`, options);
+  const response = await fetch(`${DISCIPLIN_URL}/${disciplin.id}`, options);
   return handleHttpErrors(response);
 }
 
-async function deleteDisciplin(id: number): Promise<Array<Disciplin>> {
+async function deleteDisciplin(id: number): Promise<void> {
   const options = makeOptions("DELETE");
-  return fetch(DISCIPLIN_URL + "/" + id, options).then(handleHttpErrors);
+  return fetch(`${DISCIPLIN_URL}/${id}`, options).then(handleHttpErrors);
 }
 
-//********     RESULTS ROUTES      ********//
-
-async function getResults(): Promise<Array<Results>> {
+async function getResults(): Promise<Results[]> {
   const options = makeOptions("GET");
   return fetch(RESULTS_URL, options).then(handleHttpErrors);
 }
 
+async function addResult(newResult: Results): Promise<Results> {
+  const options = makeOptions("POST", newResult);
+  return fetch(RESULTS_URL, options).then(handleHttpErrors);
+}
+
+async function editResult(result: Results): Promise<Results> {
+  const options = makeOptions("PUT", result);
+  const response = await fetch(`${RESULTS_URL}/${result.id}`, options);
+  return handleHttpErrors(response);
+}
+
+async function deleteResult(id: number): Promise<void> {
+  const options = makeOptions("DELETE");
+  return fetch(`${RESULTS_URL}/${id}`, options).then(handleHttpErrors);
+}
+
 export { getParticipants, getDisciplins, getResults };
-export { addParticipant, editParticipant, deleteParticipant, addDisciplin, editDisciplin, deleteDisciplin };
+export { addParticipant, editParticipant, deleteParticipant, addDisciplin, editDisciplin, deleteDisciplin, addResult, editResult, deleteResult };
 export type { Participants, Disciplin, Results };

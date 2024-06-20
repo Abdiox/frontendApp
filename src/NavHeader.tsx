@@ -24,6 +24,9 @@ export default function NavHeader() {
         <li>
           <NavLink to="/disciplinform">Opret Disciplin</NavLink>
         </li>
+        <li>
+          <NavLink to="/opretresult">Opret Resultat</NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
 import { getDisciplins, getParticipants } from "../services/apiFacade";
 
 export const Disciplins = () => {
