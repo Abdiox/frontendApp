@@ -48,7 +48,7 @@ export const Participants = () => {
         (genderFilter ? participant.gender === genderFilter : true) &&
         filterParticipantsByAge(ageFilter, participant.age) &&
         (clubFilter ? participant.club.includes(clubFilter) : true) &&
-        (disciplineFilter ? participant.discipline.includes(disciplineFilter) : true) &&
+        (disciplineFilter ? participant.disciplin.some((d) => d.name.includes(disciplineFilter)) : true) &&
         participant.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     })
@@ -84,30 +84,30 @@ export const Participants = () => {
       <h2>Deltager</h2>
       {error && <p>{error}</p>}
       <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-      <button onClick={() => toggleSort("name")}>Sort Name</button>
-      <button onClick={() => toggleSort("age")}>Sort Age</button>
+      <button onClick={() => toggleSort("name")}>Sorter Efter Navn</button>
+      <button onClick={() => toggleSort("age")}>Sorter Efter Alder</button>
       <select onChange={(e) => setGenderFilter(e.target.value)} value={genderFilter}>
-        <option value="">All Genders</option>
-        <option value="Mand">Male</option>
-        <option value="Kvinde">Female</option>
+        <option value="">Alle Køn</option>
+        <option value="Mand">Mand</option>
+        <option value="Kvinde">Kvinde</option>
       </select>
       <select onChange={(e) => setAgeFilter(e.target.value)} value={ageFilter}>
-        <option value="">All Ages</option>
+        <option value="">Alle Aldrer</option>
         <option value="18-25">18-25</option>
         <option value="26-35">26-35</option>
         <option value="36-45">36-45</option>
         <option value="46+">46+</option>
       </select>
-      <input type="text" placeholder="Club..." onChange={(e) => setClubFilter(e.target.value)} value={clubFilter} />
-      <input type="text" placeholder="Discipline..." onChange={(e) => setDisciplineFilter(e.target.value)} value={disciplineFilter} />
+      <input type="text" placeholder="Klub..." onChange={(e) => setClubFilter(e.target.value)} value={clubFilter} />
+      <input type="text" placeholder="Discipliner..." onChange={(e) => setDisciplineFilter(e.target.value)} value={disciplineFilter} />
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Club</th>
-            <th>Discipline</th>
+            <th>Navn</th>
+            <th>Køn</th>
+            <th>Alder</th>
+            <th>Klub</th>
+            <th>Discipliner</th>
           </tr>
         </thead>
         <tbody>
@@ -117,7 +117,7 @@ export const Participants = () => {
               <td>{participant.gender}</td>
               <td>{participant.age}</td>
               <td>{participant.club}</td>
-              <td>{participant.discipline}</td>
+              <td>{participant.disciplin.map((d) => d.name).join(", ")}</td>
             </tr>
           ))}
         </tbody>
@@ -127,10 +127,10 @@ export const Participants = () => {
           <div>
             <div className="modal-header">{selectedParticipant.name}</div>
             <div className="modal-body">
-              <p>Gender: {selectedParticipant.gender}</p>
-              <p>Age: {selectedParticipant.age}</p>
-              <p>Club: {selectedParticipant.club}</p>
-              <p>Discipline: {selectedParticipant.discipline}</p>
+              <p>Køn: {selectedParticipant.gender}</p>
+              <p>Alder: {selectedParticipant.age}</p>
+              <p>Klub: {selectedParticipant.club}</p>
+              <p>Discipliner: {selectedParticipant.disciplin.map((d) => d.name).join(", ")}</p>
             </div>
           </div>
         )}

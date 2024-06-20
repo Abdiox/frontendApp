@@ -11,6 +11,7 @@ interface Participants {
   gender: string;
   age: number;
   club: string;
+  disciplin: Disciplin;
 }
 
 interface Disciplin {

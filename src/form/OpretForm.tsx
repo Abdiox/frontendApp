@@ -67,7 +67,7 @@ export default function ParticipantForm() {
 
   return (
     <div>
-      <h2>Participants</h2>
+      <h2>Deltager</h2>
       <button className="buttonBack" type="button" onClick={handleBack}>
         Tilbage
       </button>
@@ -78,17 +78,17 @@ export default function ParticipantForm() {
           <option value="Kvinde">Kvinde</option>
         </select>
         <input type="number" id="age" value={participant.age} onChange={handleChange} placeholder="Age" />
-        <input type="text" id="club" value={participant.club} onChange={handleChange} placeholder="Club" />
-        <button type="submit">Submit</button>
+        <input type="text" id="club" value={participant.club} onChange={handleChange} placeholder="Klub" />
+        <button type="submit">Opret</button>
       </form>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Club</th>
-            <th>Actions</th>
+            <th>Navn</th>
+            <th>Køb</th>
+            <th>Alder</th>
+            <th>Klub</th>
+            <th>Rediger / Slet</th>
           </tr>
         </thead>
         <tbody>
@@ -100,10 +100,10 @@ export default function ParticipantForm() {
               <td>{participant.club}</td>
               <td>
                 <button type="button" onClick={() => handleEdit(participant)}>
-                  Edit
+                  Rediger
                 </button>
                 <button type="button" onClick={() => handleDelete(participant.id)}>
-                  Delete
+                  Slet
                 </button>
               </td>
             </tr>

@@ -63,7 +63,7 @@ export default function DisciplinForm() {
 
   return (
     <div>
-      <h2>Opret/Edit Disciplin</h2>
+      <h2>Opret / Rediger Disciplin</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" id="name" placeholder="Navn" value={disciplin.name} onChange={handleChange} />
         <select id="disciplinType" value={disciplin.disciplinType} onChange={handleChange}>
