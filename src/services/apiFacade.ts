@@ -1,13 +1,15 @@
 import { API_URL } from "../settings";
 import { makeOptions, handleHttpErrors } from "./fetchUtils";
 
-const OWNERS_URL = API_URL + "/owners";
+const OWNERS_URL = API_URL + "/participants";
 const PETS_URL = API_URL + "/pets";
 
-interface Owners {
+interface Participants {
   id: number;
   name: string;
+  gender: string;
   age: number;
+  club: string;
 }
 
 interface Pets {
@@ -15,13 +17,13 @@ interface Pets {
   name: string;
   birth: string;
   type: string;
-  owner: Owners;
+  owner: Participants;
 }
 
-let owners: Array<Owners> = [];
+let participants: Array<Participants> = [];
 let pets: Array<Pets> = [];
 
-async function getOwners(): Promise<Array<Owners>> {
+async function getParticipants(): Promise<Array<Participants>> {
   const options = makeOptions("GET");
   return fetch(OWNERS_URL, options).then(handleHttpErrors);
 }
@@ -32,4 +34,4 @@ async function getPets(): Promise<Array<Pets>> {
   return fetch(PETS_URL, options).then(handleHttpErrors);
 }
 
-export { getOwners, getPets };
+export { getParticipants, getPets };

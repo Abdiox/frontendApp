@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import { Owners } from "./components/Owners";
+import { Participants } from "./components/Participants";
 import "./App.css";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       </div>
 
       <Routes>
-        <Route path="/" element={<Owners />} />
+        <Route path="/" element={<Participants />} />
       </Routes>
       <h1>Vite + React</h1>
       <div className="card">
