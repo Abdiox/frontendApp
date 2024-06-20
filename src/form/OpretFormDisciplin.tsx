@@ -61,9 +61,16 @@ export default function DisciplinForm() {
     });
   }
 
+  function handleBack() {
+    navigate("/disciplins");
+  }
+
   return (
     <div>
       <h2>Opret / Rediger Disciplin</h2>
+      <button className="buttonBack" type="button" onClick={handleBack}>
+        Tilbage
+      </button>
       <form onSubmit={handleSubmit}>
         <input type="text" id="name" placeholder="Navn" value={disciplin.name} onChange={handleChange} />
         <select id="disciplinType" value={disciplin.disciplinType} onChange={handleChange}>

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResults, addResult, editResult, deleteResult, getParticipants, getDisciplins } from "../services/apiFacade";
 import { Results, Participants, Disciplin } from "../services/apiFacade";
+import { ResultType } from "../Enums/EnumTypes"; // Import the ResultType enum
 import "./opretResults.css"; // Make sure you have this CSS file for styling
 
 const EMPTY_RESULT: Results = {
   id: null,
-  resultType: "",
+  resultType: ResultType.TIME, // Default value for resultType
   date: new Date(),
   resultValue: 0,
   disciplin: {} as Disciplin,
@@ -87,6 +88,8 @@ export default function ResultForm() {
       if (disciplin) setResult({ ...result, disciplin, disciplinName: disciplin.name });
     } else if (id === "date") {
       setResult({ ...result, date: new Date(value) });
+    } else if (id === "resultType") {
+      setResult({ ...result, resultType: value as ResultType });
     } else {
       setResult({ ...result, [id]: value });
     }
@@ -141,7 +144,7 @@ export default function ResultForm() {
       <form onSubmit={handleSubmit}>
         <label>
           Deltager:
-          <select id="participant" value={result.participant.id || ""} onChange={handleChange}>
+          <select id="participant" value={result.participant?.id || ""} onChange={handleChange}>
             <option value="">Vælg deltager</option>
             {participants.map((participant) => (
               <option key={participant.id} value={participant.id}>
@@ -152,7 +155,7 @@ export default function ResultForm() {
         </label>
         <label>
           Disciplin:
-          <select id="disciplin" value={result.disciplin.id || ""} onChange={handleChange}>
+          <select id="disciplin" value={result.disciplin?.id || ""} onChange={handleChange}>
             <option value="">Vælg disciplin</option>
             {disciplins.map((disciplin) => (
               <option key={disciplin.id} value={disciplin.id}>
@@ -163,7 +166,13 @@ export default function ResultForm() {
         </label>
         <label>
           Resultat Type:
-          <input id="resultType" type="text" value={result.resultType} onChange={handleChange} placeholder="Result Type" />
+          <select id="resultType" value={result.resultType} onChange={handleChange}>
+            {Object.values(ResultType).map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Resultat:
@@ -171,7 +180,13 @@ export default function ResultForm() {
         </label>
         <label>
           Dato:
-          <input id="date" type="date" value={result.date.toISOString().substring(0, 10)} onChange={handleChange} placeholder="Date" />
+          <input
+            id="date"
+            type="date"
+            value={result.date instanceof Date ? result.date.toISOString().substring(0, 10) : ""}
+            onChange={handleChange}
+            placeholder="Date"
+          />
         </label>
         <button type="submit">Gem</button>
       </form>
