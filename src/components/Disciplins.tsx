@@ -15,7 +15,7 @@ export const Disciplins = () => {
 
   return (
     <div>
-      <h2>Disciplins</h2>
+      <h2>Discipliner</h2>
       <table>
         <thead>
           <tr>

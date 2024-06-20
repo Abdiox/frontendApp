@@ -15,7 +15,6 @@ export default function ParticipantForm() {
   const [participants, setParticipants] = useState<Participants[]>([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  let location = useLocation();
 
   useEffect(() => {
     getParticipants().then((participants) => {

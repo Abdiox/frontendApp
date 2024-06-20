@@ -7,6 +7,8 @@ import { Participants } from "./components/Participants";
 import { Disciplins } from "./components/Disciplins";
 import { Results } from "./components/Results";
 import ParticipantForm from "./form/OpretForm";
+import DisciplinForm from "./form/OpretFormDisciplin";
+
 import Layout from "./Layout";
 
 import "./App.css";
@@ -25,6 +27,10 @@ export default function App() {
 
         <Routes>
           <Route path="/results" element={<Results />} />
+        </Routes>
+
+        <Routes>
+          <Route path="/disciplinform" element={<DisciplinForm />} />
         </Routes>
 
         <Routes>

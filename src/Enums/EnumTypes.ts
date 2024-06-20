@@ -1,0 +1,22 @@
+// ResultType.ts
+export enum ResultType {
+  TIME = "TIME",
+  DISTANCE = "DISTANCE",
+  POINTS = "POINTS",
+}
+
+// DisciplineType.ts
+export enum DisciplineType {
+  LØB_100_METER = "LØB_100_METER",
+  LØB_200_METER = "LØB_200_METER",
+  LØB_400_METER = "LØB_400_METER",
+  LØB_800_METER = "LØB_800_METER",
+  LØB_1500_METER = "LØB_1500_METER",
+  HÆKKELØB = "HÆKKELØB",
+  HØJDESPIRING = "HØJDESPIRING",
+  STANGSPRING = "STANGSPRING",
+  LÆNGDESPRING = "LÆNGDESPRING",
+  KUGLESTØD = "KUGLESTØD",
+  DISKOSKAST = "DISKOSKAST",
+  SPYDKAST = "SPYDKAST",
+}

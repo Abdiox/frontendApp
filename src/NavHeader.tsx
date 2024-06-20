@@ -13,17 +13,17 @@ export default function NavHeader() {
         <li>
           <NavLink to="/participants">Deltager:</NavLink>
         </li>
-
         <li>
           <NavLink to="/disciplins">Discipliner:</NavLink>
         </li>
-
         <li>
           <NavLink to="/results">Resultater:</NavLink>
         </li>
-
         <li>
           <NavLink to="/opretform">Opret Deltager:</NavLink>
+        </li>
+        <li>
+          <NavLink to="/disciplinform">Opret Disciplin:</NavLink>
         </li>
       </ul>
     </nav>
