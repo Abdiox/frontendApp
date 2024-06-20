@@ -59,13 +59,13 @@ export default function ResultForm() {
     event.preventDefault();
     const action = result.id ? editResult : addResult;
 
-    const updatedResult = {
+    const resultRequest = {
       ...result,
       participantId: result.participant.id,
       disciplinId: result.disciplin.id,
     };
 
-    action(updatedResult)
+    action(resultRequest)
       .then(() => getResults())
       .then((data) => {
         setResults(data);
@@ -81,10 +81,10 @@ export default function ResultForm() {
     const { id, value } = event.target;
     if (id === "participant") {
       const participant = participants.find((p) => p.id === parseInt(value));
-      if (participant) setResult({ ...result, participant });
+      if (participant) setResult({ ...result, participant, participantName: participant.name });
     } else if (id === "disciplin") {
       const disciplin = disciplins.find((d) => d.id === parseInt(value));
-      if (disciplin) setResult({ ...result, disciplin });
+      if (disciplin) setResult({ ...result, disciplin, disciplinName: disciplin.name });
     } else {
       setResult({ ...result, [id]: value });
     }
@@ -158,6 +158,10 @@ export default function ResultForm() {
               </option>
             ))}
           </select>
+        </label>
+        <label>
+          Resultat Type:
+          <input id="resultType" type="text" value={result.resultType} onChange={handleChange} placeholder="Result Type" />
         </label>
         <label>
           Resultat:

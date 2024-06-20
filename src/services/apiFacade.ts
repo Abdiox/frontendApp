@@ -28,8 +28,6 @@ interface Results {
   resultType: string;
   date: Date;
   resultValue: number;
-  disciplin: Disciplin;
-  participant: Participants;
   participantName: string;
   disciplinName: string;
 }
