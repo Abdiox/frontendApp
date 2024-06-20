@@ -29,6 +29,7 @@ interface Results {
   disciplin: Disciplin;
   participant: Participants;
   participantName: string;
+  disciplinName: string;
 }
 
 let participants: Array<Participants> = [];
