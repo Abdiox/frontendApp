@@ -20,6 +20,7 @@ interface Disciplin {
   disciplinType: string;
   resultType: string;
   participants: Participants[];
+  disciplin: Disciplin[];
   results: Results[];
 }
 
