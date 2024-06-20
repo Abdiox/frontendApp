@@ -5,6 +5,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { Participants } from "./components/Participants";
 import { Disciplins } from "./components/Disciplins";
+import { Results } from "./components/Results";
 import ParticipantForm from "./form/OpretForm";
 import Layout from "./Layout";
 
@@ -20,6 +21,10 @@ export default function App() {
 
         <Routes>
           <Route path="/disciplins" element={<Disciplins />} />
+        </Routes>
+
+        <Routes>
+          <Route path="/results" element={<Results />} />
         </Routes>
 
         <Routes>

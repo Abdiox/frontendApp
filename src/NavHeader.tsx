@@ -19,7 +19,7 @@ export default function NavHeader() {
         </li>
 
         <li>
-          <NavLink to="/booking">Resultater:</NavLink>
+          <NavLink to="/results">Resultater:</NavLink>
         </li>
 
         <li>
