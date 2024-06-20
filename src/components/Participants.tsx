@@ -6,6 +6,7 @@ import "./Participants.css";
 
 export const Participants = () => {
   const [participants, setParticipants] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState("");
   const [selectedParticipant, setSelectedParticipant] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -31,9 +32,16 @@ export const Participants = () => {
     setModalIsOpen(false);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredParticipants = participants.filter((participant) => participant.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <div>
       <h2>Deltager</h2>
+      <input type="text" placeholder="Search by name..." value={searchQuery} onChange={handleSearchChange} style={{ marginBottom: "10px" }} />
       {error && <p>{error}</p>}
       <table>
         <thead>
@@ -45,7 +53,7 @@ export const Participants = () => {
           </tr>
         </thead>
         <tbody>
-          {participants.map((participant) => (
+          {filteredParticipants.map((participant) => (
             <tr key={participant.id} className="participant-item" onClick={() => handleParticipantClick(participant)}>
               <td>{participant.name}</td>
               <td>{participant.gender}</td>
