@@ -5,13 +5,12 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { Participants } from "./components/Participants";
 import { Disciplins } from "./components/Disciplins";
+import ParticipantForm from "./form/OpretForm";
 import Layout from "./Layout";
 
 import "./App.css";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Layout>
@@ -21,6 +20,10 @@ export default function App() {
 
         <Routes>
           <Route path="/disciplins" element={<Disciplins />} />
+        </Routes>
+
+        <Routes>
+          <Route path="/opretform" element={<ParticipantForm />} />
         </Routes>
       </Layout>
     </>

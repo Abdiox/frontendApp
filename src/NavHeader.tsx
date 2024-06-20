@@ -21,6 +21,10 @@ export default function NavHeader() {
         <li>
           <NavLink to="/booking">Resultater:</NavLink>
         </li>
+
+        <li>
+          <NavLink to="/opretform">Opret Deltager:</NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -1,4 +1,3 @@
-import { EnumDataType } from "sequelize";
 import { API_URL } from "../settings";
 import { makeOptions, handleHttpErrors } from "./fetchUtils";
 
@@ -37,6 +36,22 @@ async function getParticipants(): Promise<Array<Participants>> {
   return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
 }
 
+async function addParticipant(newParticipant: Participants): Promise<Array<Participants>> {
+  const options = makeOptions("POST", newParticipant);
+  return fetch(PARTICIPANTS_URL, options).then(handleHttpErrors);
+}
+
+async function editParticipant(participant: Participants) {
+  const options = makeOptions("PUT", participant);
+  const response = await fetch(`${API_URL}/participants/${participant.id}`, options);
+  return handleHttpErrors(response);
+}
+
+async function deleteParticipant(id: number): Promise<Array<Participants>> {
+  const options = makeOptions("DELETE");
+  return fetch(PARTICIPANTS_URL + "/" + id, options).then(handleHttpErrors);
+}
+
 async function getDisciplins(): Promise<Array<Disciplin>> {
   const options = makeOptions("GET");
   console.log("pets", disciplins);
@@ -49,3 +64,5 @@ async function getResults(): Promise<Array<Results>> {
 }
 
 export { getParticipants, getDisciplins, getResults };
+export { addParticipant, editParticipant, deleteParticipant };
+export type { Participants, Disciplin, Results };
