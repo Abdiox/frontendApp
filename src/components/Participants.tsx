@@ -93,10 +93,11 @@ export const Participants = () => {
       </select>
       <select onChange={(e) => setAgeFilter(e.target.value)} value={ageFilter}>
         <option value="">Alle Aldrer</option>
-        <option value="18-25">18-25</option>
-        <option value="26-35">26-35</option>
-        <option value="36-45">36-45</option>
-        <option value="46+">46+</option>
+        <option value="6-9">6-9 Børn</option>
+        <option value="10-13">10-13 Junior</option>
+        <option value="14-22">14-22 Unge</option>
+        <option value="23-40">23-40 Voksne</option>
+        <option value="41+">41+ Seinor</option>
       </select>
       <input type="text" placeholder="Klub..." onChange={(e) => setClubFilter(e.target.value)} value={clubFilter} />
       <input type="text" placeholder="Discipliner..." onChange={(e) => setDisciplineFilter(e.target.value)} value={disciplineFilter} />

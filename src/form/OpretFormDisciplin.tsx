@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDisciplin, editDisciplin, deleteDisciplin, getDisciplins, Disciplin } from "../services/apiFacade";
-import { DisciplineType, ResultType } from "../Enums/EnumTypes"; // Importer enum DisciplineType
+import { DisciplineType, ResultType } from "../Enums/EnumTypes";
 
 const EMPTY_DISCIPLIN: Disciplin = {
   id: 0,
   name: "",
-  disciplineType: DisciplineType.LØB_100_METER, // Default value for disciplineType
-  resultType: ResultType.TIME, // Default value for resultType
+  disciplineType: DisciplineType.LØB_100_METER,
+  resultType: ResultType.TIME,
 };
 
 export default function DisciplinForm() {
@@ -32,9 +32,7 @@ export default function DisciplinForm() {
         getDisciplins().then((disciplins) => {
           setDisciplins(disciplins);
           setDisciplin(EMPTY_DISCIPLIN);
-          setTimeout(() => {
-            window.location.reload();
-          }, 700);
+          navigate("/disciplins");
         });
       })
       .catch((error) => {
@@ -55,9 +53,7 @@ export default function DisciplinForm() {
   function handleDelete(id: number) {
     deleteDisciplin(id).then(() => {
       setDisciplins(disciplins.filter((disciplin) => disciplin.id !== id));
-      setTimeout(() => {
-        window.location.reload();
-      }, 700);
+      navigate("/disciplins");
     });
   }
 
@@ -108,6 +104,7 @@ export default function DisciplinForm() {
             </option>
           ))}
         </select>
+        <label htmlFor="resultType">Resultat Type</label>
         <select id="resultType" value={disciplin.resultType} onChange={handleChange}>
           {Object.values(ResultType).map((type) => (
             <option key={type} value={type}>

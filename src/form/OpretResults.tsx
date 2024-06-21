@@ -67,10 +67,12 @@ export default function ResultForm() {
     };
 
     action(resultRequest)
-      .then(() => getResults())
-      .then((data) => {
-        setResults(data.map((res: Results) => ({ ...res, date: new Date(res.date) })));
-        setResult(EMPTY_RESULT);
+      .then(() => {
+        getResults().then((data) => {
+          setResults(data.map((res: Results) => ({ ...res, date: new Date(res.date) })));
+          setResult(EMPTY_RESULT);
+          navigate("/results"); // Redirect to /results after submit
+        });
       })
       .catch((err) => {
         setError("Failed to submit result");
@@ -101,7 +103,10 @@ export default function ResultForm() {
 
   function handleDelete(id: number) {
     deleteResult(id)
-      .then(() => setResults(results.filter((res) => res.id !== id)))
+      .then(() => {
+        setResults(results.filter((res) => res.id !== id));
+        navigate("/results"); // Redirect to /results after delete
+      })
       .catch((err) => {
         setError("Failed to delete result");
         console.error(err);

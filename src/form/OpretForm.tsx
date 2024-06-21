@@ -39,9 +39,7 @@ export default function ParticipantForm() {
         getParticipants().then((data) => {
           setParticipants(data);
           setParticipant(EMPTY_PARTICIPANT);
-          setTimeout(() => {
-            window.location.reload();
-          }, 700);
+          navigate("/participants"); // Redirect to /participants after submit
         });
       })
       .catch((error) => {
@@ -74,11 +72,15 @@ export default function ParticipantForm() {
   }
 
   function handleDelete(id: number) {
-    deleteParticipant(id).then(() => {
-      getParticipants().then((data) => {
-        setParticipants(data);
+    deleteParticipant(id)
+      .then(() => {
+        setParticipants(participants.filter((p) => p.id !== id));
+        navigate("/participants"); // Redirect to /participants after delete
+      })
+      .catch((error) => {
+        setError("Failed to delete participant");
+        console.error(error);
       });
-    });
   }
 
   function handleBack() {
