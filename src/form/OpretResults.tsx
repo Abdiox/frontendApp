@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResults, addResult, editResult, deleteResult, getParticipants, getDisciplins } from "../services/apiFacade";
 import { Results, Participants, Disciplin } from "../services/apiFacade";
-import { ResultType } from "../Enums/EnumTypes"; // Import the ResultType enum
-import "./opretResults.css"; // Make sure you have this CSS file for styling
+import { ResultType } from "../Enums/EnumTypes"; 
+import "./opretResults.css"; 
 
 const EMPTY_RESULT = {
   id: null,
-  resultType: ResultType.TIME, // Default value for resultType
+  resultType: ResultType.TIME, 
   date: new Date(),
   resultValue: 0,
   disciplin: {} as Disciplin,
@@ -71,7 +71,7 @@ export default function ResultForm() {
         getResults().then((data) => {
           setResults(data.map((res: Results) => ({ ...res, date: new Date(res.date) })));
           setResult(EMPTY_RESULT);
-          navigate("/results"); // Redirect to /results after submit
+          navigate("/results"); 
         });
       })
       .catch((err) => {
@@ -105,7 +105,7 @@ export default function ResultForm() {
     deleteResult(id)
       .then(() => {
         setResults(results.filter((res) => res.id !== id));
-        navigate("/results"); // Redirect to /results after delete
+        navigate("/results"); 
       })
       .catch((err) => {
         setError("Failed to delete result");
