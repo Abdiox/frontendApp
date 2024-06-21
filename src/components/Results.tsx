@@ -67,6 +67,35 @@ export const Results = () => {
     setFilteredResults(filtered);
   };
 
+  const formatTimeResult = (milliseconds) => {
+    const hours = Math.floor(milliseconds / 3600000);
+    milliseconds %= 3600000;
+    const minutes = Math.floor(milliseconds / 60000);
+    milliseconds %= 60000;
+    const seconds = Math.floor(milliseconds / 1000);
+    const ms = milliseconds % 1000;
+    return `${hours}h ${minutes}m ${seconds}s ${ms}ms`;
+  };
+
+  const formatDistanceResult = (centimeters) => {
+    const meters = Math.floor(centimeters / 100);
+    const cm = centimeters % 100;
+    return `${meters}m ${cm}cm`;
+  };
+
+  const formatResult = (resultType, resultValue) => {
+    switch (resultType) {
+      case "DISTANCE":
+        return formatDistanceResult(resultValue);
+      case "POINTS":
+        return `${resultValue} points`;
+      case "TIME":
+        return formatTimeResult(resultValue);
+      default:
+        return resultValue;
+    }
+  };
+
   return (
     <div>
       <h2>Resultater</h2>
@@ -117,7 +146,7 @@ export const Results = () => {
               <td>{result.participantName}</td>
               <td>{result.disciplinName}</td>
               <td>{result.resultType}</td>
-              <td>{(result.resultValue / 1000).toFixed(2)} sekunder</td>
+              <td>{formatResult(result.resultType, result.resultValue)}</td>
               <td>{new Date(result.date).toLocaleDateString()}</td>
             </tr>
           ))}
@@ -132,8 +161,8 @@ export const Results = () => {
               <div>Deltager ID: {selectedResult.participantId}</div>
               <div>Disciplin Navn: {selectedResult.disciplinName}</div>
               <div>Resultat Type: {selectedResult.resultType}</div>
-              <div>{(selectedResult.resultValue / 1000).toFixed(2)} sekunder</div>
-              <div>Dato: {selectedResult.date}</div>
+              <div>{formatResult(selectedResult.resultType, selectedResult.resultValue)}</div>
+              <div>Dato: {new Date(selectedResult.date).toLocaleDateString()}</div>
             </div>
           </div>
         </Modal>

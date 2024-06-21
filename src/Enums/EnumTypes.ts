@@ -1,11 +1,9 @@
-// ResultType.ts
 export enum ResultType {
   TIME = "TIME",
   DISTANCE = "DISTANCE",
   POINTS = "POINTS",
 }
 
-// DisciplineType.ts
 export enum DisciplineType {
   LØB_100_METER = "LØB_100_METER",
   LØB_200_METER = "LØB_200_METER",
