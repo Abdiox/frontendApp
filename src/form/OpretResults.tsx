@@ -5,7 +5,7 @@ import { Results, Participants, Disciplin } from "../services/apiFacade";
 import { ResultType } from "../Enums/EnumTypes"; // Import the ResultType enum
 import "./opretResults.css"; // Make sure you have this CSS file for styling
 
-const EMPTY_RESULT: Results = {
+const EMPTY_RESULT = {
   id: null,
   resultType: ResultType.TIME, // Default value for resultType
   date: new Date(),
@@ -17,7 +17,7 @@ const EMPTY_RESULT: Results = {
 };
 
 export default function ResultForm() {
-  const [result, setResult] = useState<Results>(EMPTY_RESULT);
+  const [result, setResult] = useState(EMPTY_RESULT);
   const [results, setResults] = useState<Results[]>([]);
   const [participants, setParticipants] = useState<Participants[]>([]);
   const [disciplins, setDisciplins] = useState<Disciplin[]>([]);
@@ -112,6 +112,25 @@ export default function ResultForm() {
     navigate("/results");
   }
 
+  function formatResultValue(result: Results): string {
+    switch (result.resultType) {
+      case ResultType.TIME:
+        const hours = Math.floor(result.resultValue / 3600000);
+        const minutes = Math.floor((result.resultValue % 3600000) / 60000);
+        const seconds = Math.floor((result.resultValue % 60000) / 1000);
+        const milliseconds = result.resultValue % 1000;
+        return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
+      case ResultType.DISTANCE:
+        const meters = Math.floor(result.resultValue / 100);
+        const centimeters = result.resultValue % 100;
+        return `${meters}m ${centimeters}cm`;
+      case ResultType.POINTS:
+        return `${result.resultValue} points`;
+      default:
+        return result.resultValue.toString();
+    }
+  }
+
   return (
     <div className="container">
       <h2>Resultater</h2>
@@ -135,7 +154,7 @@ export default function ResultForm() {
             <tr key={res.id}>
               <td>{res.participantName}</td>
               <td>{res.disciplinName}</td>
-              <td>{res.resultValue}</td>
+              <td>{formatResultValue(res)}</td>
               <td>{new Date(res.date).toLocaleDateString()}</td>
               <td>
                 <button className="edit" onClick={() => handleEdit(res)}>
